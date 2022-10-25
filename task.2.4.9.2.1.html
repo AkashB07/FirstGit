@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //using bind
+        let mulitiply = function(x,y)
+        {
+            console.log(x*y);
+        }
+
+        let mulitiplyByTwo = mulitiply.bind(this, 2);
+        mulitiplyByTwo(5);
+
+        let mulitiplyByThree = mulitiply.bind(this, 3);
+        mulitiplyByThree(5);
+
+
+        //using  closures
+        let muliti = function(x)
+        {
+            return function(y)
+            {
+                console.log(x*y);
+            }
+        }
+
+        let mulitiByTwo = muliti(2);
+        mulitiplyByTwo(3);
+
+        let mulitiByThree = muliti(3);
+        mulitiplyByThree(3);
+    </script>
+</body>
+</html>
