@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        'use strict';
+        this.table = 'window table';
+        console.log(window.table);
+
+        const cleanTable = function(soap){
+        console.log(`cleaning ${this.table} using ${soap}`);  
+        };
+
+        this.garage = {table: 'garage table',
+        cleanTable(){
+        console.log(`cleaning ${this.table}`);}};
+        console.log(this.garage.table);
+
+        let johnRoom = {table: 'johns table',
+        cleanTable(){
+        console.log(`cleaning ${this.table}`);}};
+        console.log(johnRoom.table);
+
+        johnRoom.cleanTable();
+        this.garage.cleanTable();
+
+        cleanTable.call(this, 'some soap');
+        cleanTable.call(this.garage, 'some soap');
+        cleanTable.call(johnRoom, 'some soap');
+
+
+        const cleanTable1 = function(soap){
+            let that = this;
+            const innerFunction = function(){
+                console.log(`cleaning ${that.table} using ${soap}`);  
+            }
+            innerFunction(soap);
+        };
+        cleanTable1.call(this, 'some soap');
+        cleanTable1.call(this.garage, 'some soap');
+        cleanTable1.call(johnRoom, 'some soap');
+
+        const cleanTable2 = function(soap){
+            const innerFunction = function(){
+                console.log(`cleaning ${this.table} using ${soap}`);  
+            }
+            innerFunction.call(this, soap);
+        };
+        cleanTable2.call(this, 'some soap');
+        cleanTable2.call(this.garage, 'some soap');
+        cleanTable2.call(johnRoom, 'some soap');
+
+        
+        const cleanTable3 = function(soap){
+            const innerFunction = function(){
+                console.log(`cleaning ${this.table} using ${soap}`);  
+            }
+            innerFunction.bind(this)(soap);
+        };
+        cleanTable3.call(this, 'some soap');
+        cleanTable3.call(this.garage, 'some soap');
+        cleanTable3.call(johnRoom, 'some soap');
+
+        
+        const cleanTable4 = function(soap){
+            const innerFunction = ()=>{
+                console.log(`cleaning ${this.table} using ${soap}`);  
+            }
+            innerFunction(soap);
+        };
+        cleanTable4.call(this, 'some soap');
+        cleanTable4.call(this.garage, 'some soap');
+        cleanTable4.call(johnRoom, 'some soap');
+
+        let createRoom = function(name){
+            this.table = `${name}s table`
+        }
+        createRoom.prototype.cleanTable5 = function(soap){
+        console.log(`cleaning ${this.table} using ${soap}`);  
+        };
+        const jillsRoom = new createRoom('jill');
+        const johnsRoom = new createRoom('john');
+        jillsRoom.cleanTable5('some soap');
+        johnsRoom.cleanTable5('some soap');
+
+        class room 
+        {
+            constructor(name)
+            {
+                this.table = `${name}s table`;
+            }
+            cleanTable6(soap)
+            {
+                console.log(`cleaning ${this.table} using ${soap}`);  
+            }
+        }
+        const jillsRoom1 = new room('jill');
+        const johnsRoom1 = new room('john');
+        jillsRoom1.cleanTable6('some soap');
+        johnsRoom1.cleanTable6('some soap');
+
+     </script>
+</body>
+</html>
