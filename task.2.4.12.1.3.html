@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        class Student
+        {
+            static count = 0;
+            constructor(name, age, phoneNumber, boardMarks)
+            {
+                this.name = name;
+                this.age = age;
+                this.phoneNumber = phoneNumber;
+                this.boardMarks = boardMarks;
+                Student.count++;
+            }
+
+            eligiable()
+            {
+                if(this.age > 40)
+                {
+                    console.log(`${this.name} is eligiable.`);
+                }
+                else
+                {
+                    console.log(`${this.name} is not eligiable.`);
+                }
+            }
+
+            static totalStudent()
+            {
+                console.log(`The total number of stundents are ${Student.count}`);
+            }
+        }
+
+        let s1 = new Student('Akash', 23, 987654321, 60);
+        let s2 = new Student('Ram', 25, 987654861, 30);
+
+        Student.totalStudent();
+
+        let s3 = new Student('Rahul', 20, 987654861, 85);
+        let s4 = new Student('Vikas', 21, 987645261, 72);
+        let s5 = new Student('Charan', 26, 752454861, 10);
+
+        s1.eligiable();
+        s5.eligiable();
+        Student.totalStudent();
+
+    </script>
+</body>
+</html>
