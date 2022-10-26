@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        class Student
+        {
+            static count = 0;
+            constructor(name, age, phoneNumber, boardMarks)
+            {
+                this.name = name;
+                this.age = age;
+                this.phoneNumber = phoneNumber;
+                this.boardMarks = boardMarks;
+                Student.count++;
+            }
+
+            egligibleForPlacements(minMarks)
+            {
+                return (minAge)=>
+                {
+                    if(this.age>minAge && this.boardMarks>minMarks)
+                    {
+                        console.log(true);
+                    }
+                    else
+                    {
+                        console.log(false);
+                    }
+                }
+            }
+
+            egligibleStudents(minMarks)
+            {
+                return (minAge)=>
+                {
+                    if(this.age>minAge && this.boardMarks>minMarks)
+                    {
+                        console.log(this.name);
+                    }
+                }
+            }
+        }
+
+        let s1 = new Student('Akash', 23, 987654321, 60);
+        let s2 = new Student('Ram', 25, 987654861, 30);
+        let s3 = new Student('Rahul', 20, 987654861, 85);
+        let s4 = new Student('Vikas', 21, 987645261, 72);
+        let s5 = new Student('Charan', 26, 752454861, 70);
+
+        s1.egligibleForPlacements(50)(22);
+        s2.egligibleForPlacements(50)(22);
+        s3.egligibleForPlacements(50)(22);
+        s4.egligibleForPlacements(50)(22);
+        s5.egligibleForPlacements(50)(22);
+
+        s1.egligibleStudents(50)(22);
+        s2.egligibleStudents(50)(22);
+        s3.egligibleStudents(50)(22);
+        s4.egligibleStudents(50)(22);
+        s5.egligibleStudents(50)(22);
+        
+    </script>
+</body>
+</html>
