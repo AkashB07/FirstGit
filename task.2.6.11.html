@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <header>
+        <h1>Booking Application</h1>
+      </header>
+    <form  onsubmit="saveToLocalStorage(event)">
+        <label> Name</label>
+        <input id='username' type="text" name="username"  required/>
+        <label> EmailId</label>
+        <input id='email' type="email" name="emailId"  required/>
+        <label> Phone Number</label>
+        <input id='phonenumber' type="tel" name="phonenumber" />
+        <button> Submit </button>
+    </form>
+    <ul id='listOfUsers'></ul>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.1.3/axios.min.js"> </script>
+    <script>
+        function saveToLocalStorage(event) 
+        {
+            event.preventDefault();
+            const name = event.target.username.value;
+            const email = event.target.emailId.value;
+            const phonenumber = event.target.phonenumber.value;
+           
+            const obj = {
+                name,
+                email,
+                phonenumber
+            }
+            
+            axios.post("https://crudcrud.com/api/a2549173ec604ba1a4c4bbdf7ee49bdb/appointmentData", obj)
+            .then((response)=>{
+                console.log(response)
+            })
+            .catch((err)=>{
+                console.log(err)
+            })
+        }     
+    </script>
+</body>
+</html>
