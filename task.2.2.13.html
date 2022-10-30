@@ -61,13 +61,15 @@
 
             function showNewUserOnScreen(user)
             {
+              document.getElementById('email').value = '';
+              document.getElementById('name').value = '';
                 if(localStorage.getItem(user.email) != null)
                 {
                     removeUserFromScreen(user.email);
                 }
               let parentNode = document.getElementById('users');
               let childHtml = `<li id = ${user.email}> ${user.name} - ${user.email}
-                <button onclick = deletUser('${user.email}')>Delet User</button>
+                <button onclick = deleteUser('${user.email}')>Delete User</button>
                 <button onclick = editUserDetails('${user.email}','${user.name}')>Edit User </button>
                     </li>`;
               parentNode.innerHTML = parentNode.innerHTML + childHtml; 
@@ -80,7 +82,7 @@
              deleteUser(emailId)
              }
 
-            function deletUser(emailId)
+            function deleteUser(emailId)
             {
                 localStorage.removeItem(emailId);
                 removeUserFromScreen(emailId);
