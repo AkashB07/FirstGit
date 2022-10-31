@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const posts =[{title : 'Post One', body : 'This is post one', createdAt : new Date().getTime()},
+                      {title : 'Post Two', body : 'This is post two', createdAt : new Date().getTime()}];
+        let intervalID = 0;
+
+        function getPosts()
+        {
+            clearInterval(intervalID);
+            intervalID = setInterval(() => {
+                let output ='';
+                posts.forEach(post =>{
+                    output = output + `<li>${post.title} created ${(new Date().getTime() - post.createdAt)/1000} seconds ago</li>`;
+                });
+                document.body.innerHTML = output;             
+            }, 1000);
+        }   
+        
+        function createPost(post)
+        {
+            return new Promise((resolve, reject)=>{
+                setTimeout(() => 
+                {
+                  posts.push({...post, createdAt : new Date().getTime()});
+                  const error = false;
+                  if(!error)
+                  {
+                    resolve();
+                  }
+                  else
+                  {
+                    reject('Error: Something went wrong')
+                  }
+                }, 1000);              
+            })         
+        }
+
+        // function create4thPost(post)
+        // {
+        //     return new Promise((resolve, reject)=>{
+        //         setTimeout(() => 
+        //         {
+        //           posts.push({...post, createdAt : new Date().getTime()});
+        //           const error = false;
+        //           if(!error)
+        //           {
+        //             resolve();
+        //           }
+        //           else
+        //           {
+        //             reject('Error: Something went wrong')
+        //           }
+        //         }, 1000);              
+        //     })         
+        // }
+
+        function deletPost()
+        {
+            return new Promise((resolve, reject)=>{
+                setTimeout(() => 
+                {
+                  if(posts.length>0)
+                  {
+                    const lastelement = posts.pop();
+                    resolve(lastelement);
+                  }
+                  else
+                  {
+                    reject('Array is empty now');
+                  }
+                }, 1000);              
+            })         
+        }
+
+        
+        createPost({title : 'Post Three', body : 'This is post three'})
+        // .then(()=>{
+        //     getPosts()
+        //     deletPost().then(()=>{
+        //         getPosts()
+        //         deletPost().then(()=>{
+        //             getPosts()
+        //             deletPost().then(()=>{
+        //                 getPosts()
+        //                 deletPost().then(()=>{})
+        //                 .catch((err)=>{
+        //                     console.log('Inside catch block',err);
+        //                 })
+        //             })
+        //         })
+        //     })
+        // });
+
+        createPost({title : 'Post Four', body : 'This is post four'})
+        .then(()=>{
+          getPosts()
+            deletPost().then(()=>{
+                getPosts()
+                deletPost().then(()=>{
+                    getPosts()
+                    deletPost().then(()=>{
+                        getPosts()
+                        deletPost().then(()=>{
+                          getPosts()
+                          deletPost().then(()=>{})
+                          .catch((err)=>{
+                            console.log(err);
+                          })
+                          .catch((err)=>{
+                            console.log(err)});
+                       })
+                       .catch((err)=>{
+                            console.log(err)});
+                    })
+                    .catch((err)=>{
+                            console.log(err)});
+                  })
+                  .catch((err)=>{
+                            console.log(err)});
+               })
+               .catch((err)=>{
+                            console.log(err)});
+            });
+    </script>
+</body>
+</html>
